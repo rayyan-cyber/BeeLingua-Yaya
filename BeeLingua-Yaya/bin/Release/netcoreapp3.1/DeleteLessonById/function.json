@@ -15,5 +15,5 @@
   ],
   "disabled": false,
   "scriptFile": "../bin/BeeLingua-Yaya.dll",
-  "entryPoint": "BeeLingua_Yaya.Function1.DeleteLessonById"
+  "entryPoint": "BeeLingua_Yaya.Functions.Azure.DeleteLessonById"
 }
