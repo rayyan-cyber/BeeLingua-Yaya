@@ -1,0 +1,18 @@
+{
+  "generatedBy": "Microsoft.NET.Sdk.Functions-3.0.11",
+  "configurationSource": "attributes",
+  "bindings": [
+    {
+      "type": "httpTrigger",
+      "route": "LessonNexus/Delete/{id}/{pk}",
+      "methods": [
+        "delete"
+      ],
+      "authLevel": "function",
+      "name": "req"
+    }
+  ],
+  "disabled": false,
+  "scriptFile": "../bin/BeeLingua-Yaya.dll",
+  "entryPoint": "BeeLingua_Yaya.Functions.Nexus.DeleteLessonNexus"
+}
