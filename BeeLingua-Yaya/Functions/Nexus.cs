@@ -23,7 +23,7 @@ namespace BeeLingua_Yaya.Functions
         {
             try
             {
-                using var rep = new Repository.Repositories.ClassRepository(documentClient);
+                using var rep = new Repository.Repositories.LessonRepository(documentClient);
                 var data = await rep.GetAsync();
                 return new OkObjectResult(data);
             }
@@ -43,7 +43,7 @@ namespace BeeLingua_Yaya.Functions
         {
             try
             {
-                using var rep = new Repository.Repositories.ClassRepository(documentClient);
+                using var rep = new Repository.Repositories.LessonRepository(documentClient);
                 var data = await rep.GetAsync(predicate: p => p.Id == id, partitionKeys: new Dictionary<string, string> { { "LessonCode", pk } });
                 return new OkObjectResult(data);
             }
@@ -62,15 +62,15 @@ namespace BeeLingua_Yaya.Functions
             try
             {
                 string reqBody = await new StreamReader(req.Body).ReadToEndAsync();
-                var input = JsonConvert.DeserializeObject<Models.Lesson>(reqBody);
+                var input = JsonConvert.DeserializeObject<Lesson>(reqBody);
 
-                var dataToBeUpdated = new Models.Lesson
+                var dataToBeUpdated = new Lesson
                 {
                     LessonCode = input.LessonCode,
                     Description = input.Description
                 };
 
-                using var rep = new Repository.Repositories.ClassRepository(documentClient);
+                using var rep = new Repository.Repositories.LessonRepository(documentClient);
                 var data = await rep.CreateAsync(dataToBeUpdated);
                 return new OkObjectResult(data);
             }
@@ -90,16 +90,16 @@ namespace BeeLingua_Yaya.Functions
             try
             {
                 string reqBody = await new StreamReader(req.Body).ReadToEndAsync();
-                var input = JsonConvert.DeserializeObject<Models.Lesson>(reqBody);
+                var input = JsonConvert.DeserializeObject<Lesson>(reqBody);
 
-                var dataToBeUpdated = new Models.Lesson
+                var dataToBeUpdated = new Lesson
                 {
                     Id = id,
                     LessonCode = input.LessonCode,
                     Description = input.Description
                 };
 
-                using var rep = new Repository.Repositories.ClassRepository(documentClient);
+                using var rep = new Repository.Repositories.LessonRepository(documentClient);
                 var data = await rep.UpdateAsync(id, dataToBeUpdated);
                 return new OkObjectResult(data);
             }
@@ -119,7 +119,7 @@ namespace BeeLingua_Yaya.Functions
         {
             try
             {
-                using var rep = new Repository.Repositories.ClassRepository(documentClient);
+                using var rep = new Repository.Repositories.LessonRepository(documentClient);
                 await rep.DeleteAsync(id, partitionKeys: new Dictionary<string, string> { { "LessonCode", pk } });
                 return new OkObjectResult("Deleted");
             }
