@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BeeLingua_Yaya.Class
 {
-    public class Lesson : ModelBase
+    public class Lesson
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -16,5 +16,8 @@ namespace BeeLingua_Yaya.Class
 
         [JsonProperty("description")]
         public string Description { get; set; }
+
+        [JsonProperty("partitionKey")]
+        public string PartitionKey { get; set; }
     }
 }
