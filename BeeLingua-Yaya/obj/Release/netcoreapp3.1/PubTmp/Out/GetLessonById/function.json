@@ -14,5 +14,5 @@
   ],
   "disabled": false,
   "scriptFile": "../bin/BeeLingua-Yaya.dll",
-  "entryPoint": "BeeLingua_Yaya.Function1.GetLessonById"
+  "entryPoint": "BeeLingua_Yaya.Functions.Azure.GetLessonById"
 }
