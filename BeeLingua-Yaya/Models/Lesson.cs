@@ -1,10 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Nexus.Base.CosmosDBRepository;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace BeeLingua_Yaya.Models
+namespace BeeLingua_Yaya
 {
     public class Lesson : ModelBase
     {
