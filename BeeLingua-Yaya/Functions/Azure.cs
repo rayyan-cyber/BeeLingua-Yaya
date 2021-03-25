@@ -12,12 +12,16 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
+using Microsoft.Azure.EventGrid;
+using Microsoft.Azure.EventGrid.Models;
 using Newtonsoft.Json;
 
 namespace BeeLingua_Yaya.Functions
 {
     public static class Azure
     {
+        private static object secretService;
+
         [FunctionName("GetAllLesson")]
         public static async Task<IActionResult> GetAllLesson(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
@@ -141,12 +145,12 @@ namespace BeeLingua_Yaya.Functions
         }
 
         [FunctionName("InsertLesson")]
-        public static IActionResult InsertLesson(
+        public static  IActionResult InsertLesson(
             [HttpTrigger(AuthorizationLevel.Function, nameof(HttpMethods.Post), Route = null)] HttpRequestMessage req,
             [CosmosDB(
                 databaseName: "Course",
                 collectionName: "Lesson",
-                ConnectionStringSetting = "cosmos-bl-tutorial-serverless")] out Class.Lesson lessonData,
+                ConnectionStringSetting = "cosmos-bl-tutorial-serverless")] out Lesson lessonData,
             TraceWriter log)
         {
             lessonData = null;
@@ -155,7 +159,7 @@ namespace BeeLingua_Yaya.Functions
                 ObjectResult result;
                 string responMessage = default;
 
-                lessonData = req.Content.ReadAsAsync<Class.Lesson>().Result;
+                lessonData = req.Content.ReadAsAsync<Lesson>().Result;
 
                 responMessage = "Please provide a value";
                 result = new BadRequestObjectResult(responMessage);
@@ -168,6 +172,8 @@ namespace BeeLingua_Yaya.Functions
                         result = new BadRequestObjectResult(responMessage);
                     }
                 }
+
+
                 return new OkObjectResult(result);
             }
             catch (Exception ex)
